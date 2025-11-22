@@ -11,14 +11,11 @@ export default function ConnectButton({ disabled }: ConnectButtonProps) {
 	const { connect, connectors, isPending, error } = useConnect();
 	const connections = useConnections();
 
-	const connector = useMemo(
-		() => connectors.find((item) => item.id === "farcaster" || item.type === "farcasterMiniApp"),
-		[connectors],
-	);
+	const connector = useMemo(() => connectors.find((item) => item.id === "farcaster" || item.type === "farcasterMiniApp"), [connectors]);
 
 	const farcasterConnection = useMemo(
 		() => connections.find((item) => item.connector.id === connector?.id || item.connector.type === "farcasterMiniApp"),
-		[connections, connector?.id, connector?.type],
+		[connections, connector?.id, connector?.type]
 	);
 
 	const connectedAddress = address ?? farcasterConnection?.accounts?.[0];
@@ -30,8 +27,7 @@ export default function ConnectButton({ disabled }: ConnectButtonProps) {
 			<button
 				onClick={() => connector && !farcasterConnection && connect({ connector })}
 				disabled={!connector || disabled || isPending || !!farcasterConnection}
-				className='rounded-md bg-purple-600 px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-purple-400'
-			>
+				className='rounded-full bg-purple-600 px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-purple-400'>
 				{isPending ? "Conectando..." : "Conectar Wallet"}
 			</button>
 			{!connector && <p className='text-sm text-red-500'>No se encontró el conector de Farcaster.</p>}
