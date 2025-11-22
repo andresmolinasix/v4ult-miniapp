@@ -29,7 +29,7 @@ export default async function RootLayout({
 	const cookies = headersObj.get("cookie");
 
 	return (
-		<html lang='en'>
+		<html lang='en' data-theme='dark'>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<ContextProvider cookies={cookies}>{children}</ContextProvider>
 			</body>
