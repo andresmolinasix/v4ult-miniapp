@@ -34,3 +34,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Configuración de Farcaster MiniApp
+
+1. Define las variables en tu `.env.local`:
+   - `NEXT_PUBLIC_PROJECT_ID` (Reown/AppKit).
+   - `FARCASTER_ACCOUNT_ASSOCIATION_HEADER`
+   - `FARCASTER_ACCOUNT_ASSOCIATION_PAYLOAD`
+   - `FARCASTER_ACCOUNT_ASSOCIATION_SIGNATURE`
+   - `FARCASTER_MINIAPP_NAME`
+   - `FARCASTER_MINIAPP_HOME_URL`
+   - `FARCASTER_MINIAPP_ICON_URL`
+   - `FARCASTER_MINIAPP_IMAGE_URL`
+   - `FARCASTER_MINIAPP_BUTTON_TITLE`
+   - Opcionales: `FARCASTER_MINIAPP_SPLASH_IMAGE_URL`, `FARCASTER_MINIAPP_SPLASH_BACKGROUND_COLOR`, `FARCASTER_MINIAPP_WEBHOOK_URL`, `FARCASTER_MINIAPP_CANONICAL_DOMAIN`.
+2. El manifest vivo se sirve en `/.well-known/farcaster.json`; responde 500 si falta alguna variable requerida.
+3. Genera los valores de `accountAssociation` con la herramienta de dominios de Warpcast para vincular tu cuenta al dominio donde desplegues la app.
