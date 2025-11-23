@@ -1,5 +1,5 @@
 export const MANAGER = {
-	address: "0x589E518cc50dafA4e3c5291325ddF99E77dE5329",
+	address: "0xf2b303538cD4744BedD94901a297cDCAbd5f4D98",
 	abi: [
 		{
 			inputs: [
@@ -134,6 +134,68 @@ export const MANAGER = {
 				},
 			],
 			name: "ProjectCreated",
+			type: "event",
+		},
+		{
+			anonymous: false,
+			inputs: [
+				{
+					indexed: true,
+					internalType: "uint8",
+					name: "projectId",
+					type: "uint8",
+				},
+				{
+					indexed: true,
+					internalType: "address",
+					name: "swapper",
+					type: "address",
+				},
+			],
+			name: "ProjectSwapperUpdated",
+			type: "event",
+		},
+		{
+			anonymous: false,
+			inputs: [
+				{
+					indexed: true,
+					internalType: "uint8",
+					name: "projectId",
+					type: "uint8",
+				},
+				{
+					indexed: true,
+					internalType: "address",
+					name: "user",
+					type: "address",
+				},
+				{
+					indexed: false,
+					internalType: "uint256",
+					name: "amountIn",
+					type: "uint256",
+				},
+				{
+					indexed: false,
+					internalType: "uint256",
+					name: "amountSwapped",
+					type: "uint256",
+				},
+				{
+					indexed: false,
+					internalType: "uint256",
+					name: "amountOut",
+					type: "uint256",
+				},
+				{
+					indexed: true,
+					internalType: "address",
+					name: "swapper",
+					type: "address",
+				},
+			],
+			name: "SingleSidedLiquidity",
 			type: "event",
 		},
 		{
@@ -332,6 +394,25 @@ export const MANAGER = {
 					type: "uint8",
 				},
 			],
+			name: "projectSwappers",
+			outputs: [
+				{
+					internalType: "address",
+					name: "",
+					type: "address",
+				},
+			],
+			stateMutability: "view",
+			type: "function",
+		},
+		{
+			inputs: [
+				{
+					internalType: "uint8",
+					name: "",
+					type: "uint8",
+				},
+			],
 			name: "projects",
 			outputs: [
 				{
@@ -400,6 +481,47 @@ export const MANAGER = {
 				},
 			],
 			name: "setProjectIsActive",
+			outputs: [],
+			stateMutability: "nonpayable",
+			type: "function",
+		},
+		{
+			inputs: [
+				{
+					internalType: "uint8",
+					name: "projectId",
+					type: "uint8",
+				},
+				{
+					internalType: "address",
+					name: "swapper",
+					type: "address",
+				},
+			],
+			name: "setProjectSwapper",
+			outputs: [],
+			stateMutability: "nonpayable",
+			type: "function",
+		},
+		{
+			inputs: [
+				{
+					internalType: "uint8",
+					name: "projectId",
+					type: "uint8",
+				},
+				{
+					internalType: "uint256",
+					name: "_amount",
+					type: "uint256",
+				},
+				{
+					internalType: "bytes",
+					name: "swapData",
+					type: "bytes",
+				},
+			],
+			name: "singleSidedDepositAndSwap",
 			outputs: [],
 			stateMutability: "nonpayable",
 			type: "function",
