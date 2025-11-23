@@ -3,7 +3,7 @@ import { BoxesCore } from "@/app/components/ui/background-boxes";
 // import { SparklesCore } from "@/components/ui/sparkles";
 import ConnectButton from "./components/connectButton";
 import { sdk } from "@farcaster/miniapp-sdk";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import BalancingForm from "./components/balancingForm";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import { EncryptedText } from "@/components/ui/encrypted-text";
