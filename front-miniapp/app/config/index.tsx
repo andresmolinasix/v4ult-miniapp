@@ -1,27 +1,38 @@
-import { cookieStorage, createStorage, http } from "@wagmi/core";
-import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
-import { celo, celoAlfajores } from "@reown/appkit/networks";
+import { cookieStorage, createConfig, createStorage, http } from "wagmi";
+import { celo, celoAlfajores } from "wagmi/chains";
+import { coinbaseWallet, injected, walletConnect } from "wagmi/connectors";
 import { farcasterMiniApp as miniAppConnector } from "@farcaster/miniapp-wagmi-connector";
 
-// Get projectId from https://dashboard.reown.com
-export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
-
+// Project ID is used by WalletConnect-compatible connectors.
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 if (!projectId) {
 	throw new Error("Project ID is not defined");
 }
 
-// Keep these aligned with the AppKit modal configuration to avoid repeated "switch network" prompts.
-export const networks = [celoAlfajores, celo];
-
-//Set up the Wagmi Adapter (Config)
-export const wagmiAdapter = new WagmiAdapter({
+export const config = createConfig({
+	chains: [celoAlfajores, celo],
+	transports: {
+		[celoAlfajores.id]: http(),
+		[celo.id]: http(),
+	},
+	connectors: [
+		miniAppConnector(),
+		injected({ shimDisconnect: true }),
+		walletConnect({
+			projectId,
+			metadata: {
+				name: "V4ULT Mini App",
+				description: "Manage and balance your V4ULT assets",
+				url: "https://localhost",
+				icons: ["https://avatars.githubusercontent.com/u/179229932"],
+			},
+		}),
+		coinbaseWallet({
+			appName: "V4ULT Mini App",
+		}),
+	],
 	storage: createStorage({
 		storage: cookieStorage,
 	}),
 	ssr: true,
-	projectId,
-	networks,
-	connectors: [miniAppConnector()],
 });
-
-export const config = wagmiAdapter.wagmiConfig;

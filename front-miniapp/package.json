@@ -14,8 +14,6 @@
     "@farcaster/miniapp-wagmi-connector": "^1.1.0",
     "@gemini-wallet/core": "^0.3.2",
     "@metamask/sdk": "^0.34.0",
-    "@reown/appkit": "^1.8.14",
-    "@reown/appkit-adapter-wagmi": "^1.8.14",
     "@tanstack/react-query": "^5.90.10",
     "@tsparticles/engine": "^3.9.1",
     "@tsparticles/react": "^3.0.0",
@@ -34,7 +32,7 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "viem": "^2.39.3",
-    "wagmi": "^3.0.1"
+    "wagmi": "2.19.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

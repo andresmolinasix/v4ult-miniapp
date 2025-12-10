@@ -3,7 +3,7 @@ import { BoxesCore } from "@/app/components/ui/background-boxes";
 // import { SparklesCore } from "@/components/ui/sparkles";
 import ConnectButton from "./components/connectButton";
 import { sdk } from "@farcaster/miniapp-sdk";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BalancingForm from "./components/balancingForm";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import { EncryptedText } from "@/components/ui/encrypted-text";
@@ -24,12 +24,15 @@ export default function Home() {
 					setIsMiniApp(inMiniApp);
 				}
 
-				// Only signal readiness when running inside a Farcaster client.
-				if (inMiniApp) {
-					await sdk.actions.ready();
-				}
 			} catch (error) {
 				console.error("Error while initializing Farcaster MiniApp SDK", error);
+			}
+
+			// Always signal readiness to the host; if not in MiniApp it will be a no-op or safely caught.
+			try {
+				await sdk.actions.ready();
+			} catch (error) {
+				console.warn("sdk.actions.ready() failed", error);
 			}
 		})();
 
@@ -107,12 +110,7 @@ export default function Home() {
 							</div>
 						</div>
 
-						{/* <ConnectButton disabled={!isMiniApp} />
-						{!isMiniApp && (
-							<p className='text-sm text-gray-600 dark:text-gray-300'>
-								Open this MiniApp inside the Farcaster mobile app to connect your wallet.
-							</p>
-						)} */}
+						<ConnectButton disabled={false} />
 						<BalancingForm />
 					</div>
 				</div>

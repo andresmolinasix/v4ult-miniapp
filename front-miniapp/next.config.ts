@@ -1,7 +1,8 @@
-import path from "path";
 import type { NextConfig } from "next";
 
-const asyncStorageStub = path.join(__dirname, "lib", "async-storage-stub.ts");
+// Use a project-relative path so Turbopack/webpack don't resolve to an absolute
+// "/Users/..." import (which triggers the "server relative imports" error).
+const asyncStorageStub = "./lib/async-storage-stub.ts";
 
 const nextConfig: NextConfig = {
   // Use the browser build of pino so Turbopack does not try to bundle
